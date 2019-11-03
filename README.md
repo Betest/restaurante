@@ -1,2 +1,2 @@
-## Welcome to GitHub Pages
+## Welcome to Palacios Restaurant Pages
 
