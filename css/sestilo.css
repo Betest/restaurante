@@ -1,0 +1,64 @@
+#contenedors{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-image: url('img/fondorecor.jpg');
+    background-size: 100% 100%;
+    height: 700px;
+    float: left;
+}
+#bannersomos{
+    float: left;
+    width: 50%;
+    margin-left: 25%;
+    height: 300px;
+    background-image: url('img/quienessomos.jpg');
+    background-size: 100% 100%;
+    margin-top:60px;
+    border-radius: 10px;
+}
+#sections{
+    width: 60%;
+    float: left;
+    height: 300px;
+    margin-left: 20%;
+    border:px solid black;
+    margin-top: 20px;
+}
+#msgsomos{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;;
+    height: 230px;
+    float: left;
+    border: px solid black;
+    font-size: 22px;
+    font-family: sans-serif;
+    
+}
+#msgsomos1{
+    margin-top: 20px;
+    width: 90%;
+    margin-left: 5%;
+    height: 50px;
+    float: left;
+    border: px solid black;
+    text-align: center;
+}
+@media screen and (min-width: 500px) and (max-width: 1600px) {
+    #contenedors{
+        height: 800px;
+    }
+    #bannersomos{
+        width: 60%;
+        margin-left: 20%;
+    }
+    #sections{
+        width: 70%;
+        margin-left: 15%;
+    }
+    #msgsomos{
+        font-size: 18px;
+    }
+}
+
