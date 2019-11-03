@@ -388,9 +388,9 @@
                     echo "<td>".$categori->name."</td>";
                     echo "<td>".$categori->description."</td>";
                     echo "<td><img src='".base_url().$categori->ruta."' style='width:100px'/> </td>";
-                    echo "<script>document.getElementById('txtidentct').value='$categori->identct'</script>";
-                    echo "<script>document.getElementById('txtname').value='$categori->name'</script>";
-                    echo "<script>document.getElementById('txtdescription').value='$categori->description'</script>";
+                    echo "<script>document.getElementById('txtidentctv').value='$categori->identct'</script>";
+                    echo "<script>document.getElementById('txtnamev').value='$categori->name'</script>";
+                    echo "<script>document.getElementById('txtdescriptionv').value='$categori->description'</script>";
                 echo "</tr>";    
             }
         }
