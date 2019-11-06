@@ -323,7 +323,7 @@
             
         </div>
         <div class="form-group">
-            <h3>Valor5745</h3>
+            <h3>Valor</h3>
             
                 <input type="text" id="txtvalue" name="txtvalue" class="form-control" style="width:40%;" value="<?= (isset($detailproducto[0])) ? $detailproducto[0]->value : ""; ?>">
            
