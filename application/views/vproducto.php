@@ -329,7 +329,7 @@
            
         </div>
         <div class="form-group">
-            <h3>Imagen234</h3>
+            <h3>Imagen23433</h3>
             
                 <input type="file" name="fileToUpload" id="fileToUpload"/>
             <br>
