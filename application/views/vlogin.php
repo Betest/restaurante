@@ -256,7 +256,7 @@ body{
                 <div class="row">
                 <legend style="text-align: center;">
                 <input type="submit" class="btn btn-success" value="Ingresar">
-                <a href="recuperar.php" class="btn">¿Olvido su contraseña?</a>
+                <a href="recuperar.php" class="btn">¿Olvido su password?</a>
                 </div>
                 <div class="row">
                 <legend style="text-align: center;">
