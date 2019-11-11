@@ -7,20 +7,23 @@
     <title>Zona de Categorias</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <style>
+    <style>
         #display > img {
             width: 100px;
             height: 100px;
         }
     </style>
-    
-    <body>
     <script>
+        function mostrarcategoria() {
+            document.getElementById('txtidentct').value=document.getElemetById('txtidentct').value;
+        }
 
         function pasardatos(){
-            document.getElementById('txtidentctact').value=document.getElementById('txtidentct').value;  
+            document.getElementById('txtidentpract').value=document.getElementById('txtidentpr').value;  
             document.getElementById('txtnameact').value=document.getElementById('txtname').value;
-            document.getElementById('txtdescriptionact').value=document.getElementById('txtdescription').value;
+            document.getElementById('txtdescact').value=document.getElementById('txtdesc').value;
+            document.getElementById('txtidentctact').value=document.getElementById('txtidentct').value;
+            document.getElementById('txtvalueact').value=document.getElementById('txtvalue').value;
         }
 
         function confirmarEliminar(){
@@ -34,18 +37,18 @@
             }
         }
         function pasarident(){
-            document.getElementById('txtidentcte').value=document.getElementById('txtidentct').value;
+            document.getElementById('txtidentpr').value=document.getElementById('txtidentpr').value;
         }
     </script>
 </head>
 
 <body>
 <script>
-        $(document).ready(function(){
-            setTimeout(function(){
-                $('.mensaje').text("");
-            },2000);
-        });
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('.mensaje').text("");
+        }, 2000);
+    });
 </script>
 <style>
     body{
@@ -74,6 +77,10 @@
     margin-left: 10%;
     height: 200px;
     border: px solid black;
+}
+#display > img {
+    width: 100px;
+    height: 100px;
 }
 #divi1{
     width: 100%;
@@ -240,6 +247,18 @@
     margin-top:60px;
     border-radius: 10px;
 }
+.container-productos {
+        -webkit-box-shadow: 0px 0px 46px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 46px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 46px 0px rgba(0,0,0,0.75);
+        background: white;
+        width: 90%;
+        margin-top: 25px;
+        border-radius: 25px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        height: 800px;
+    }
 @media screen and (min-width: 500px) and (max-width: 1280px) { 
     #footer{
         background-image: url('../img/fondoinres.jpg');
@@ -273,131 +292,63 @@
     
 }
 </style>
-<div id="banner">
-            
-            </div>
-<center>
 
-    <span style="color:red">
-    <?php
-        echo validation_errors(); 
-    ?>
-    </span>
-    <div class="container p-4">
-    <form id="form" method="POST" enctype="multipart/form-data" action="<?= base_url() ?>index.php/ccategoria/agregarcategoria">
-    <form id="form" >
-        <div class="form-group">
-                <h3>Codigo Categoria</h3>
-                
-                        <input type="text" id="txtidentct" name="txtidentct" class="form-control" style="width:40%;"autocomplete="off" value=" <?php echo set_value('txtidentct'); ?>">
-                
-        </div>
-        <div class="form-group">
-                <h3>Nombre Categoria</h3>
-                
-                        <input type="text" id="txtname" name="txtname" class="form-control" style="width:40%;" value=" <?= (isset($detailcategoria[0])) ? $detailcategoria[0]->name : ""; ?>">
-                
-        </div>
-        <div class="form-group">
-                <h3>Descripción</h3>
-                
-                        <input type="text" id="txtdescription" name="txtdescription" class="form-control" style="width:40%;" value=" <?= (isset($detailcategoria[0])) ? $detailcategoria[0]->description : ""; ?>">
-                
-        </div>
-        <div class="form-group">
-            <h3>Imagen</h3>
-            
-                <input type="file" name="fileToUpload" id="fileToUpload"/>
-            <br>
-            <div id="display">
-                <?= (isset($detailcategoria[0])) ? "<img src='".base_url().$detailcategoria[0]->ruta."'" : ""; ?>
+    <center>
+        <span style="color:red">
+            <?php
+                echo validation_errors();
+            ?>
+        </span>
+        <div class='container-productos'>
+            <h3>Agregar producto</h3>
+            <div class="container p-4">
+                <form id="form" method="POST" enctype="multipart/form-data" >
+                    <div class="form-group">
+                        <h3>Codigo Producto</h3>
+                        <input type="text" id="txtidentpr" name="txtidentpr" class="form-control" style="width:40%;"autocomplete="off" value=" <?php echo set_value('txtidentpr'); ?>">
+                    </div>
+                    <div class="form-group">
+                            <h3>Nombre Producto</h3>
+                            <input type="text" id="txtname" name="txtname" class="form-control" style="width:40%;" value=" <?= (isset($detailproducto[0])) ? $detailproducto[0]->name : ""; ?>">
+                    </div>
+                    <div class="form-group">
+                            <h3>Descripción</h3>
+                            <input type="text" id="txtdesc" name="txtdesc" class="form-control" style="width:40%;" value=" <?= (isset($detailproducto[0])) ? $detailproducto[0]->desc : ""; ?>">
+                    </div>
+
+                    <div class="form-group">
+                    <h3>Categoria</h3>
+                        <select id="txtidentct" name="txtidentct" style="width:40%;" class="form-control">
+                            <?php 
+                                foreach($categoria as $item):
+                                    echo "<option>$item->identct</option>";
+                                endforeach;
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3>Valor</h3>
+                        <input type="text" id="txtvalue" name="txtvalue" class="form-control" style="width:40%;" value="<?= (isset($detailproducto[0])) ? $detailproducto[0]->value : ""; ?>">
+                    </div>
+                    <div class="form-group">
+                        <h3>Imagen</h3>
+                        <input type="file" name="fileToUpload" id="fileToUpload"/>
+                        <br>
+                        <div id="display">
+                            <?= (isset($detailproducto[0])) ? "<img src='".base_url().$detailproducto[0]->ruta."'" : ""; ?>
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <input type="submit" id="btnenviar" class="btn btn-success" name="btnenviar" style="margin-top:20px;width:15%;float:left;margin-left:20%;margin-right:5%;" value="Guardar">
+                        <a href='/restaurante5/index.php/clistarproducto' class="btn btn-secondary" style="margin-top:20px;width:15%;float:left;margin-left:20%;margin-right:5%;">Cancelar</i></a>
+                        
+                    </div>
+                </form>
             </div>
         </div>
-        
-        <div class="form-group" >
-                <input type="submit" id="btnenviar" class="btn btn-success" name="btnenviar" style="margin-top:20px;width:15%;float:left;margin-left:20%;margin-right:5%;" value="Guardar">
-        </div>
-     </form>
-
-     <?php
-            echo form_close();
-         ?>
-         </div>
-         <div class="container; p-4">
-    <?php echo form_open('ccategoria/actualizarcategoria');?>
-        <form>
-            <input type="hidden" id="txtidentctact" name="txtidentctact">
-            <input type="hidden" id="txtnameact" name="txtnameact">
-            <input type="hidden" id="txtdescriptionact" name="txtdescriptionact">
-            <input type="submit" id="btnactualizar" class="btn btn-primary" name="btnactualizar" style="margin-top:-28px;width:10%;float:left;margin-left:-1%;margin-right:35%;" value="Actualizar" onclick="pasardatos()";>
-        </form>
-    <?php echo form_close();?>
-    </div>
-     <span class="mensaje">
-         <?php
-            if(isset($mensaje)){
-                echo $mensaje;
-            }
-         ?>
-     </span>
-         <?php
-            echo form_open('ccategoria/listacategoriasxident');
-         ?>
-         <form>
-         <div class="form-group">
-                <h3>Codigo Categoria</h3>
-                
-                <input type="text" id="txtidentct" name="txtidentct" class="form-control" style="width:20%;" autocomplete="off" value="<?php echo set_value('txtidentct');?>">
-                
-        </div>
-        <div class="form-group" style="">
-                <input type="submit" id="btnbuscar" class="btn btn-info" name="btnbuscar" style="margin-top:20px;width:15%;" value="Buscar">
-        </div>
-         </form>
-         <?php
-            echo form_close();
-         ?>
-         <?php
-            echo form_open('ccategoria/eliminarcategoria');
-         ?>
-         <form id="frmeliminar">
-         <div class="form-group">
-                
-                <input type="hidden" id="txtidentcte" name="txtidentcte" class="form-control" style="width:40%;" value=" <?php echo set_value('txtidentct'); ?>">
-                
-        </div>
-        <div class="form-group" style="" id="freli">
-                <input type="submit" id="btneliminar" class="btn btn-danger" name="btneliminar" style="margin-top:-430px;width: 10%;margin-left:20%" value="Eliminar" onclick="confirmarEliminar()">
-        </div>
-         </form>
-         <?php 
-          echo form_close();
-         ?>
-         <h1>LISTA DE CATEGORIAS</h1>
-    <table border="2" style="margin-top:20px;background: #FFFFFF; width:70%;" class="table table-striped">
-        <th>Codigo de Categoria</th>
-        <th>Nombre</th>
-        <th>Descripcion</th>
-        <th>Imagén</th>
-        <?php
-        if($detailcategoria){
-            foreach($detailcategoria as $categori)
-            {
-                echo "<tr>";
-                    echo "<td>".$categori->identct."</td>";
-                    echo "<td>".$categori->name."</td>";
-                    echo "<td>".$categori->description."</td>";
-                    echo "<td><img src='".base_url().$categori->ruta."' style='width:100px'/> </td>";
-                    echo "<script>document.getElementById('txtidentct').value='$categori->identct'</script>";
-                    echo "<script>document.getElementById('txtname').value='$categori->name'</script>";
-                    echo "<script>document.getElementById('txtdescription').value='$categori->description'</script>";
-                echo "</tr>";    
-            }
-        }
-        ?>
-    </table>
-        </center>
-        <script>
+       
+    </center>
+<script>
         function readFile(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -422,7 +373,7 @@
             readFile(e.srcElement);
         }
 </script>
-        <div id="footer">
+<div id="footer">
         <div id="sectionfooter">
             <div id="datos">
                 <div id="divi1">
@@ -478,5 +429,5 @@
             </div>
         </div>
     </div>
-</body>
+    </body>
 </html>

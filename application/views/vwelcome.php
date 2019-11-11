@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/png" href="../img/filete.png">
-    <title>Palacio Restaurant</title>
+    <title>Palacios Restaurant</title>
 </head>
 <style>
     body {
@@ -431,7 +431,7 @@
         <div id="menu">
             <ul>
                 <li><a href="<?php echo base_url(); ?>index.php/cwelcome" style="text-decoration: none;color: white;">Inicio</a></li>
-                <li><a href="<?php echo base_url(); ?>/" style="text-decoration: none;color: white;">Menu</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/cmenu" style="text-decoration: none;color: white;">Menu</a></li>
                 <li><a href="<?php echo base_url(); ?>index.php/ccontactenos" style="text-decoration: none;color: white;">Contactanos</a></li>
                 <li><a class="active" href="<?php echo base_url(); ?>index.php/csomos" style="text-decoration: none;color: white;">Quienes somos</a></li>
                 

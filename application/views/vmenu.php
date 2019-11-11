@@ -4,10 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/css/vloginestilo.css">
+    <title>Zona de Menú</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <style>
+        #display > img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    
+    <body>
+    <script>
+
+        function pasardatos(){
+            document.getElementById('txtcodmenuact').value=document.getElementById('txtcodmenu').value;  
+            document.getElementById('txtentradaact').value=document.getElementById('txtentrada').value;
+            document.getElementById('txtplatofuerteact').value=document.getElementById('txtplatofuerte').value;
+            document.getElementById('txtpostreact').value=document.getElementById('txtpostre').value;
+            document.getElementById('txtfechaact').value=document.getElementById('txtfecha').value;
+        }
+
+        function confirmarEliminar(){
+            if(confirm("¿Esta seguro de eliminar este Menú?")){
+                pasarident();
+                document.getElementById('frmeliminar').submit();
+                document.getElementById('btnbuscar').value=document.getElementById('').value;
+            }
+            else{
+                return false;
+            }
+        }
+        function pasarident(){
+            document.getElementById('txtcodmenue').value=document.getElementById('txtcodmenu').value;
+        }
+    </script>
 </head>
+
+<body>
+<script>
+        $(document).ready(function(){
+            setTimeout(function(){
+                $('.mensaje').text("");
+            },2000);
+        });
+</script>
 <style>
-body{
+    body{
     background-image: url('../img/fondo.jpg');
 }
 #footer{
@@ -191,8 +235,8 @@ body{
     border: 1px solid white;
 }
 #banner{
-    width: 70%;
-    margin-left: 15%;
+    width: 50%;
+    margin-left: 25%;
     height: 300px;
     background-image: url('../img/banner.jpg');
     background-size: 100% 100%;
@@ -232,43 +276,59 @@ body{
     
 }
 </style>
-<body>
-    <div class="container pt-4">
-        <div id="banner">
-            
+
+    <div class="container">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <?php
+                    if(isset($menu)) {
+                        foreach ($menu as $key => $value) {
+                ?>
+                            <li data-target="#myCarousel" data-slide-to="0"></li>
+                <?php
+                        }
+                    }
+                ?>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+
+                <?php
+                    if(isset($menu)) {
+                        foreach ($menu as $key => $value) {
+                ?>
+                            <div class="item">
+                                <img src="<?=base_url().$value->ruta?>" alt="Los Angeles" style="width: 70%; height: 360px; margin: auto;">
+                                <div class="carousel-caption">
+                                    <h3><?=$value->name?></h3>
+                                    <p><?=$value->desc?></p>
+                                </div>
+                            </div>
+                <?php
+                        }
+                    }
+                ?>
+            </div>
+
+            <script>
+                document.querySelector("#myCarousel > ol > li:nth-child(1)").className = "active";
+                document.querySelector("div.item").className += " active";
+            </script>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        <form action="" method="POST">
-        <legend style="text-align: center;"><h1>Iniciar Sesion</h1>
-
-            <div class="form-group" style="width:40%;margin-left:30%;">
-
-                <input type="text" name="txtident" id="txtident" placeholder="Documento" class="form-control" >
-            </div>
-
-            <div class="form-group">
-
-                <input type="password" style="width:40%;margin-left:30%;" name="txtpassword" id="txtpassword" placeholder="Contraseña" class="form-control">
-
-            </div>
-
-            <div class="form-group">
-            
-                <div class="row">
-                <legend style="text-align: center;">
-                <input type="submit" class="btn btn-success" value="Ingresar">
-                <a href="recuperar.php" class="btn">¿Olvido su contraseña?</a>
-                </div>
-                <div class="row">
-                <legend style="text-align: center;">
-                <a href="<?= site_url('cregister') ?>" class="btn">Registrarse</a>
-                </div>
-
-
-            </div>
-        </form>
-
-
     </div>
+
     <div id="footer">
         <div id="sectionfooter">
             <div id="datos">
@@ -326,3 +386,4 @@ body{
         </div>
     </div>
 </body>
+</html>
