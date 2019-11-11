@@ -47,10 +47,10 @@ class mregister extends CI_Model
             $query = $this->db->query("Select ident From usuario where ident = ?",$ident);
                 if($query->num_rows()==0){
                     $this->db->insert('usuario',$datos);
-                    $mensaje="Se ha agregado el Usuario correctamente";
+                    $mensaje=200;
                 }
                 else{
-                    $mensaje="El Usuario con este codigo ya existe";
+                    $mensaje=205;
                 }
                 return $mensaje;
         }

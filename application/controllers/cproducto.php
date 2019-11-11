@@ -20,7 +20,7 @@ class cproducto extends CI_Controller
             redirect('login');
         }
         $lproductos = $this->mproducto->listarproductos();
-        $datos['detailproducto'] = "";
+        $datos['productos'] = $lproductos;
 
         $lcategorias = $this->mproducto->mostrarcategoria();
         $datos['categoria'] = $lcategorias;
@@ -41,19 +41,6 @@ class cproducto extends CI_Controller
             $this->load->view('header');
             $this->load->view('Welcome_message');
         }
-    }
-
-    function listarproductos()
-    {
-        $lproductos = $this->mproducto->listarproductos();
-        $datos['detailproducto'] = $lproductos;
-
-        $lcategorias = $this->mproducto->mostrarcategoria();
-        $datos['categoria'] = $lcategorias;
-
-        $this->load->view('head');
-        $this->load->view('header');
-        $this->load->view('vproducto', $datos);
     }
 
     function listaproductosxident()
@@ -80,7 +67,7 @@ class cproducto extends CI_Controller
         $datos['categoria'] = $lcategorias;
 
         $eliminar   = $this->input->post('btneliminar');
-        if ($eliminar !== null) {
+        if (isset($eliminar)) {
             $mens = $this->mproducto->eliminarproducto($this->input->post('txtidentpr'));
             $datos['mensaje'] = $mens;
             $this->load->view('head');
@@ -88,8 +75,8 @@ class cproducto extends CI_Controller
             $this->load->view('vproducto', $datos);
         }
 
-        $this->form_validation->set_rules('txtname', 'Nombre Producto', 'trim|required|max_length[30]|min_length[2]');
-        $this->form_validation->set_rules('txtdesc', 'Descripción De Producto', 'trim|required|max_length[500]|min_length[2]');
+        $this->form_validation->set_rules('txtname', 'Nombre Producto', 'trim|required|max_length[30]|min_length[6]');
+        $this->form_validation->set_rules('txtdesc', 'Descripción De Producto', 'trim|required|max_length[500]|min_length[6]');
         $this->form_validation->set_rules('txtidentct', 'Codigo Categoria', 'trim|required|max_length[30]|min_length[2]');
 
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
@@ -112,7 +99,7 @@ class cproducto extends CI_Controller
             $actualizar = $this->input->post('btnactualizar');
 
             if (!$this->upload->do_upload("fileToUpload")) {
-                if ($actualizar !== null) {
+                if (isset($actualizar)) {
                     $file_info = $this->upload->data();
                     $imagen = strtolower($file_info['file_name']);
                     $imagen = explode(" ", $imagen);
@@ -133,22 +120,34 @@ class cproducto extends CI_Controller
                 $this->load->view('header');
                 $this->load->view('vproducto', $datos);
             } else {
-
-                $file_info = $this->upload->data();
-
-                $imagen = strtolower($file_info['file_name']);
-                $imagen = explode(" ", $imagen);
-                $imagen = "uploads/" . implode("", $imagen);
-                $identpra = $this->input->post('txtidentpr');
-                $namea = $this->input->post('txtname');
-                $desca = $this->input->post('txtdesc');
-                $identcta = $this->input->post('txtidentct');
-                $valuea = $this->input->post('txtvalue');
+                if (isset($actualizar)) {
+                    $file_info = $this->upload->data();
+                    $imagen = strtolower($file_info['file_name']);
+                    $imagen = explode(" ", $imagen);
+                    $imagen = "uploads/" . implode("", $imagen);
+                    $identpra = $this->input->post('txtidentpr');
+                    $namea = $this->input->post('txtname');
+                    $desca = $this->input->post('txtdesc');
+                    $identcta = $this->input->post('txtidentct');
+                    $valuea = $this->input->post('txtvalue');
+                    $mens = $this->mproducto->actualizarproducto($identpra, $namea, $desca, $identcta, $valuea, $imagen);
+                    $datos['mensaje'] = $mens;
+                    $this->load->view('head');
+                    $this->load->view('header');
+                    $this->load->view('vproducto', $datos);
+                }
                 
-                
+                if (!isset($eliminar) && !isset($actualizar)) {
+                    $file_info = $this->upload->data();
 
-                if ($eliminar === null && $actualizar === null) {
-
+                    $imagen = strtolower($file_info['file_name']);
+                    $imagen = explode(" ", $imagen);
+                    $imagen = "uploads/" . implode("", $imagen);
+                    $identpra = $this->input->post('txtidentpr');
+                    $namea = $this->input->post('txtname');
+                    $desca = $this->input->post('txtdesc');
+                    $identcta = $this->input->post('txtidentct');
+                    $valuea = $this->input->post('txtvalue');
                     $mens = $this->mproducto->agregarproducto($identpra, $namea, $desca, $identcta, $valuea, $imagen);
                     $datos['mensaje'] = $mens;
                     $this->load->view('head');

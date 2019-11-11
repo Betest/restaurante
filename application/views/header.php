@@ -19,7 +19,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= site_url('menu') ?>">Menu</a>
+                        <a class="nav-link" href="/restaurante5/index.php/cmenu">Menu</a>
                     </li>
 
                     <?php if ($this->session->userdata('txtident')) : ?>
@@ -27,7 +27,7 @@
                             <a class="nav-link" href="<?= site_url('categoria') ?>">Categoria</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= site_url('producto') ?>">Productos</a>
+                            <a class="nav-link" href="<?php echo base_url(); ?>index.php/clistarproducto">Productos</a>
                         </li>
                     <?php endif ?>
                     <li class="nav-item">

@@ -57,19 +57,20 @@
                 $lusuarios = $this->mregister->listarusuarios();
                 $datos['usuarios']=$lusuarios;
 
-                $this->form_validation->set_rules('txtident','Identificacion','required|min_length[6]|max_length[15]|is_unique[usuario.ident]');
-                $this->form_validation->set_rules('txttipeuser','Tipo usuario','required|min_length[3]|max_length[15]');
-                $this->form_validation->set_rules('txtemail','Email','required|valid_email|is_unique[usuario.email]');
-                $this->form_validation->set_rules('txtpassword','Contraseña','required|min_length[6]');
-                $this->form_validation->set_rules('txtpasswordc','Confirmacion contraseña','trim|required|min_length[6]|matches[txtpassword]');
+                $this->form_validation->set_rules('txtident','Identificacion','required');
+                $this->form_validation->set_rules('txttipeuser','Tipo usuario','required|max_length[15]');
+                $this->form_validation->set_rules('txtemail','Email','required|valid_email');
+                $this->form_validation->set_rules('txtpassword','Contraseña','required');
+                $this->form_validation->set_rules('txtpasswordc','Confirmacion contraseña','trim|required|matches[txtpassword]');
 
                 $this->form_validation->set_message('required','El campo %s es obligatorio');
                 $this->form_validation->set_message('min_length','El campo %s debe tener minimo %d caracteres');
                 $this->form_validation->set_message('max_length','El campo %s debe tener maximo %d caracteres');
                 if (!$this->form_validation->run())
                 {
+                    $this->load->view('head');
                     $this->load->view('header');
-                    redirect('producto');
+                    $this->load->view('vregister',$datos);
                 }
                 else
                 {                    
@@ -81,8 +82,12 @@
                         $password = $this->input->post('txtpassword');
                         $mens=$this->mregister->agregarusuario($ident,$tipeuser,$email,$password);
                         $datos['mensaje']=$mens;
-                        redirect('producto');
-                    
+                        if($mens === 200) {
+                            redirect("producto");
+                        } else {
+                            
+                            $this->load->view('vregister',$datos);
+                        }
                   
 
                 }   

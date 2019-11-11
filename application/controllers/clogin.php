@@ -20,12 +20,12 @@ class clogin extends CI_Controller
     {
         //validando que la sesion exista
         if ($this->session->userdata('txtident')) {
-            redirect('producto');
+            redirect('clistarproducto');
         }
         if (isset($_POST['txtident'], $_POST['txtpassword'])) {
             if ($this->mlogin->login($_POST['txtident'], md5($_POST['txtpassword']))) {
                 $this->session->set_userdata('txtident', $_POST['txtident']); //asignando la sesion al usuario actual
-                redirect('producto');
+                redirect('clistarproducto');
             } else {
                 redirect('login');
             }

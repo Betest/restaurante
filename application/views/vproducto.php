@@ -329,7 +329,7 @@
            
         </div>
         <div class="form-group">
-            <h3>Imagen2343deef3</h3>
+            <h3>Imagen</h3>
             
                 <input type="file" name="fileToUpload" id="fileToUpload"/>
             <br>
@@ -384,20 +384,20 @@
         <th>Valor</th>
         <th>Imagen</th>
         <?php
-        if ($detailproducto) {
-            foreach ($detailproducto as $product) {
+        if (isset($productos)) {
+            foreach ($productos as $product) {
                 echo "<tr>";
                 echo "<td>" . $product->identpr . "</td>";
                 echo "<td>" . $product->name . "</td>";
-                echo "<td>" . $product->desc . "</td>";
+                echo "<td>" . $product->description . "</td>";
                 echo "<td>" . $product->identct . "</td>";
                 echo "<td>" . $product->value . "</td>";
                 echo "<td><img src='".base_url().$product->ruta."' style='width:100px'/> </td>";
-                echo "<script>document.getElementById('txtidentprv').value='$product->identpr'</script>";
-                echo "<script>document.getElementById('txtnamev').value='$product->name'</script>";
-                echo "<script>document.getElementById('txtdescriptionv').value='$product->desc'</script>";
-                echo "<script>document.getElementById('txtidentctv').value='$product->identct'</script>";
-                echo "<script>document.getElementById('txtvaluev').value='$product->value'</script>";
+                echo "<script>document.getElementById('txtidentpr').value='$product->identpr'</script>";
+                echo "<script>document.getElementById('txtname').value='$product->name'</script>";
+                echo "<script>document.getElementById('txtdescription').value='$product->description'</script>";
+                echo "<script>document.getElementById('txtidentct').value='$product->identct'</script>";
+                echo "<script>document.getElementById('txtvalue').value='$product->value'</script>";
                 echo "</tr>";
             }
         }
