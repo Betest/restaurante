@@ -32,11 +32,11 @@ class mregister extends CI_Model
         }
         function listausuariosxident($identif)
         {
-           $query = $this->db->query("Select * From usuario where ident = ?",$identif);
+           $query = $this->db->get_where("usuario",array("ident"=>$identif));
             return $query->result();
         }
         function agregarusuario($ident,$tipeuser,$email,$password){
-            $datos=array(
+            /*$datos=array(
                         'ident'=> $ident,
                         'tipeuser' => $tipeuser,
                         'email' => $email,
@@ -52,7 +52,35 @@ class mregister extends CI_Model
                 else{
                     $mensaje=205;
                 }
-                return $mensaje;
+                return $mensaje;*/
+                
+                $ident=$this->security->xss_clean($ident);
+                $password=$this->security->xss_clean($password);
+				$tipeuser=$this->security->xss_clean($tipeuser);
+				$email=$this->security->xss_clean($email);
+				
+				
+				$query=$this->db->get_where("usuario",array("ident"=>$ident));
+
+				$resultado=$query->result_array();
+				if(count($resultado)>0) {
+					$mensaje="Este cliente ya existe. Revise los datos ingresados";
+				}else{
+					$datos=array(
+						"ident" => $ident,
+						"password" => md5($password),
+			            "tipeuser" => $tipeuser,
+			            "email" => $email
+						 );
+				$this->db->insert("usuario",$datos);
+				$mensaje=200;
+				}
+
+				return $mensaje;
+
+
+
+
         }
 
         function actualizarusuario($ident,$tipeuser,$email,$password){
