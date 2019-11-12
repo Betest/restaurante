@@ -24,8 +24,7 @@ class clogin extends CI_Controller
         }
 
 
-        $this->form_validation->set_rules('docident', 'Cliente', 'trim|required|min_length[8]|max_length[10]');
-        $this->form_validation->set_rules('clave', 'Clave', 'trim|required|min_length[4]|max_length[4]');
+
 
 
         if ($this->form_validation->run() == FALSE) {
@@ -38,6 +37,10 @@ class clogin extends CI_Controller
                 }
             }
         } else {
+            $this->form_validation->set_rules('docident', 'Cliente', 'trim|required');
+            $this->form_validation->set_rules('clave', 'Clave', 'trim|required');
+
+            $this->form_validation->set_message('required', 'El campo %s es obligatorio');
             redirect('login');
         }
 
